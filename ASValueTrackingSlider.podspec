@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
                        * Option to animate background color and slider track color as value changes
                        * Optional dataSource protocol to fully customize label text
                        DESC
-  s.homepage         = "https://github.com/alskipp/ASValueTrackingSlider"
+  s.homepage         = "https://github.com/ChronicStim/ASValueTrackingSlider"
   s.screenshots      = "http://alskipp.github.io/ASValueTrackingSlider/img/screenshot1.gif",
                        "http://alskipp.github.io/ASValueTrackingSlider/img/screenshot2.png"
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/al_skipp'
   
   s.platform         = :ios, '8.0'
-  s.source           = { :git => "https://github.com/alskipp/ASValueTrackingSlider.git", :tag => "0.12.1" }
+  s.source           = { :git => "https://github.com/ChronicStim/ASValueTrackingSlider.git", :branch => "CPT_version_4_0_x" }
   s.source_files     = 'ASValueTrackingSlider'
   s.requires_arc     = true
 
