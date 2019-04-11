@@ -200,7 +200,9 @@
 
 - (void)colorDidUpdate:(UIColor *)opaqueColor
 {
-    super.minimumTrackTintColor = opaqueColor;
+    if (self.autoAdjustTrackColor) {
+        super.minimumTrackTintColor = opaqueColor;
+    }
 }
 
 // returns the current offset of UISlider value in the range 0.0 – 1.0
@@ -349,8 +351,13 @@
 - (void)setValue:(float)value
 {
     [super setValue:value];
+
+    __weak __typeof__(self) weakSelf = self;
     [self.popUpView setAnimationOffset:[self currentValueOffset] returnColor:^(UIColor *opaqueReturnColor) {
-        super.minimumTrackTintColor = opaqueReturnColor;
+        __typeof__(self) strongSelf = weakSelf;
+        if (strongSelf.autoAdjustTrackColor) {
+            super.minimumTrackTintColor = opaqueReturnColor;
+        }
     }];
 }
 
@@ -360,8 +367,12 @@
         [self.popUpView animateBlock:^(CFTimeInterval duration) {
             [UIView animateWithDuration:duration animations:^{
                 [super setValue:value animated:animated];
+                __weak __typeof__(self) weakSelf = self;
                 [self.popUpView setAnimationOffset:[self currentValueOffset] returnColor:^(UIColor *opaqueReturnColor) {
-                    super.minimumTrackTintColor = opaqueReturnColor;
+                    __typeof__(self) strongSelf = weakSelf;
+                    if (strongSelf.autoAdjustTrackColor) {
+                        super.minimumTrackTintColor = opaqueReturnColor;
+                    }
                 }];
                 [self layoutIfNeeded];
             }];
@@ -388,8 +399,12 @@
 {
     BOOL continueTrack = [super continueTrackingWithTouch:touch withEvent:event];
     if (continueTrack) {
+        __weak __typeof__(self) weakSelf = self;
         [self.popUpView setAnimationOffset:[self currentValueOffset] returnColor:^(UIColor *opaqueReturnColor) {
-            super.minimumTrackTintColor = opaqueReturnColor;
+            __typeof__(self) strongSelf = weakSelf;
+            if (strongSelf.autoAdjustTrackColor) {
+                super.minimumTrackTintColor = opaqueReturnColor;
+            }
         }];
     }
     return continueTrack;

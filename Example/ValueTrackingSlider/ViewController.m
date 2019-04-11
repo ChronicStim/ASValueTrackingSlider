@@ -41,6 +41,7 @@
     [formatter setNumberStyle:NSNumberFormatterPercentStyle];
     [self.slider2 setNumberFormatter:formatter];
     self.slider2.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:26];
+    self.slider2.autoAdjustTrackColor = NO;
     self.slider2.popUpViewAnimatedColors = @[[UIColor purpleColor], [UIColor redColor], [UIColor orangeColor]];
     self.slider2.popUpViewArrowLength = 20.0;
     
