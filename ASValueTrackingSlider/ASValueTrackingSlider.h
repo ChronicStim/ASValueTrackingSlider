@@ -61,6 +61,10 @@
 
 // delegate is only needed when used with a TableView or CollectionView - see below
 @property (weak, nonatomic) id<ASValueTrackingSliderDelegate> delegate;
+
+// flag set when control is responding to user initiated touch events
+@property (nonatomic, assign, getter=isTrackingUserTouches) BOOL trackingUserTouches;
+
 @end
 
 

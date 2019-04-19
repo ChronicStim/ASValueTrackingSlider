@@ -391,7 +391,10 @@
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
     BOOL begin = [super beginTrackingWithTouch:touch withEvent:event];
-    if (begin && !self.popUpViewAlwaysOn) [self _showPopUpViewAnimated:YES];
+    if (begin && !self.popUpViewAlwaysOn) {
+        self.trackingUserTouches = YES;
+        [self _showPopUpViewAnimated:YES];
+    }
     return begin;
 }
 
@@ -399,6 +402,7 @@
 {
     BOOL continueTrack = [super continueTrackingWithTouch:touch withEvent:event];
     if (continueTrack) {
+        self.trackingUserTouches = YES;
         __weak __typeof__(self) weakSelf = self;
         [self.popUpView setAnimationOffset:[self currentValueOffset] returnColor:^(UIColor *opaqueReturnColor) {
             __typeof__(self) strongSelf = weakSelf;
@@ -413,12 +417,14 @@
 - (void)cancelTrackingWithEvent:(UIEvent *)event
 {
     [super cancelTrackingWithEvent:event];
+    self.trackingUserTouches = NO;
     if (self.popUpViewAlwaysOn == NO) [self _hidePopUpViewAnimated:YES];
 }
 
 - (void)endTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event
 {
     [super endTrackingWithTouch:touch withEvent:event];
+    self.trackingUserTouches = NO;
     if (self.popUpViewAlwaysOn == NO) [self _hidePopUpViewAnimated:YES];
 }
 
